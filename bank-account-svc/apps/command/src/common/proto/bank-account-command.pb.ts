@@ -1,3 +1,6 @@
+import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
+import { configure, util } from 'protobufjs';
+import Long from 'long';
 import { Observable } from 'rxjs';
 
 export const protobufPackage = 'bank_account_command';
@@ -45,4 +48,42 @@ export interface BankAccountCommandServiceController {
     | Promise<CloseAccountResponse>
     | Observable<CloseAccountResponse>
     | CloseAccountResponse;
+}
+
+export function BankAccountCommandServiceControllerMethods() {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  return function (constructor: Function) {
+    const grpcMethods: string[] = ['openAccount', 'closeAccount'];
+    for (const method of grpcMethods) {
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(
+        constructor.prototype,
+        method,
+      );
+      GrpcMethod('BankAccountCommandService', method)(
+        constructor.prototype[method],
+        method,
+        descriptor,
+      );
+    }
+
+    const grpcStreamMethods: string[] = [];
+    for (const method of grpcStreamMethods) {
+      const descriptor: any = Reflect.getOwnPropertyDescriptor(
+        constructor.prototype,
+        method,
+      );
+      GrpcStreamMethod('BankAccountCommandService', method)(
+        constructor.prototype[method],
+        method,
+        descriptor,
+      );
+    }
+  };
+}
+
+export const BANK_ACCOUNT_COMMAND_SERVICE_NAME = 'BankAccountCommandService';
+
+if (util.Long !== Long) {
+  util.Long = Long;
+  configure();
 }

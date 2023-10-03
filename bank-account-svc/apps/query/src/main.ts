@@ -2,9 +2,9 @@ import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
-import { Transport } from '@nestjs/microservices';
-import { BANK_ACCOUNT_COMMAND_PACKAGE_NAME } from './common/proto/bank-account-command.pb';
 import { HttpExceptionFilter } from '@shared/filter/http-exception.filter';
+import { Transport } from '@nestjs/microservices';
+import { BANK_ACCOUNT_QUERY_PACKAGE_NAME } from '@query/common/proto/bank-account-query.pb';
 
 async function bootstrap(): Promise<void> {
   const app: INestApplication = await NestFactory.create(AppModule);
@@ -13,12 +13,12 @@ async function bootstrap(): Promise<void> {
 
   await configure(app, config);
 
-  app.listen(undefined, () => {
+  await app.listen(undefined, () => {
     logger.log(`[NOD] ${process.version}`);
     logger.log(`[ENV] ${process.env.NODE_ENV}`);
     logger.log(`[DKR] ${process.env.IS_DOCKER ? true : false}`);
     logger.log(`[KFK] ${config.get('KAFKA_URL')}`);
-    logger.log(`[URL] ${config.get('COMMAND_GRPC_URL')}`);
+    logger.log(`[URL] ${config.get('QUERY_GRPC_URL')}`);
   });
 }
 
@@ -34,10 +34,26 @@ async function configure(
     {
       transport: Transport.GRPC,
       options: {
-        url: config.get('COMMAND_GRPC_URL'),
-        package: BANK_ACCOUNT_COMMAND_PACKAGE_NAME,
+        url: config.get('QUERY_GRPC_URL'),
+        package: BANK_ACCOUNT_QUERY_PACKAGE_NAME,
         protoPath:
-          'node_modules/bank-shared-proto/proto/bank-account-command.proto',
+          'node_modules/bank-shared-proto/proto/bank-account-query.proto',
+      },
+    },
+    { inheritAppConfig: true },
+  );
+
+  app.connectMicroservice(
+    {
+      transport: Transport.KAFKA,
+      options: {
+        client: {
+          clientId: 'bank-account-client',
+          brokers: [config.get('KAFKA_URL')],
+        },
+        consumer: {
+          groupIOd: 'bank-account-svc',
+        },
       },
     },
     { inheritAppConfig: true },
