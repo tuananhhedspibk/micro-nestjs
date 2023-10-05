@@ -1,4 +1,4 @@
-import { OpenAccountCommand } from '@shared/commands/open-account.command';
+import { OpenAccountCommand } from '@shared/commands';
 import { AccountType } from '@shared/enums/account-type.enum';
 import { BaseEvent } from 'nestjs-event-sourcing';
 
