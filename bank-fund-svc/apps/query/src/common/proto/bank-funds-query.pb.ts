@@ -15,7 +15,7 @@ export interface GetBalanceResponse {
   data: number;
 }
 
-export const BAN_FUNDS_QUERY_PACKAGE_NAME = 'bank_funds_query';
+export const BANK_FUNDS_QUERY_PACKAGE_NAME = 'bank_funds_query';
 
 export interface BankFundsQueryServiceClient {
   getBalance(request: GetBalanceRequest): Observable<GetBalanceResponse>;

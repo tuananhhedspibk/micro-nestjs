@@ -732,6 +732,14 @@
     path-to-regexp "3.2.0"
     tslib "2.6.2"
 
+"@nestjs/microservices@^10.2.7":
+  version "10.2.7"
+  resolved "https://registry.yarnpkg.com/@nestjs/microservices/-/microservices-10.2.7.tgz#fc17ee5eeaeccc8ac05f6295c601170c04f8604e"
+  integrity sha512-ggpng1yRuugPufn+OKeHV6Dcw3TWI7lmOvXkyYRwatVHQMvb3MlPpbzsA5PfUlg5DsjPGEWRbkIWN7OFb8OTyw==
+  dependencies:
+    iterare "1.2.1"
+    tslib "2.6.2"
+
 "@nestjs/platform-express@^10.0.0":
   version "10.2.7"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-10.2.7.tgz#b2ef2df01c0c757a3d356659460563a5246e7d0f"
@@ -1318,7 +1326,7 @@ ajv-keywords@^3.5.2:
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
   integrity sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==
 
-ajv@8.12.0, ajv@^8.0.0:
+ajv@8.12.0:
   version "8.12.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.12.0.tgz#d1a0527323e22f53562c567c00991577dfbe19d1"
   integrity sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==

@@ -42,4 +42,4 @@ import { OpenAccountSaga } from './sagas/open-account.saga';
     OpenAccountSaga,
   ],
 })
-export class OpenAccountModule { }
+export class OpenAccountModule {}
