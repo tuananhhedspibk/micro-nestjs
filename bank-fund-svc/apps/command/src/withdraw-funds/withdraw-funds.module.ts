@@ -37,4 +37,4 @@ import { FundsWithdrawnHandler } from './events/funds-withdrawn.handler';
     EventSourcingHandler,
   ],
 })
-export class WithdrawFundsModule { }
+export class WithdrawFundsModule {}

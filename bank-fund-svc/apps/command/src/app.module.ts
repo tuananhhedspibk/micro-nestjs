@@ -26,4 +26,4 @@ import { ReceiveFundsModule } from './receive-funds/receive-funds.module';
     ReceiveFundsModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
