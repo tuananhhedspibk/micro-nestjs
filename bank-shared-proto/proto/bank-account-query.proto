@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package bank_account_query;
+
+option go_package = "./";
+
+service BankaccountQueryService {
+  rpc FindAccount(FindAccountRequest) returns (FindAccountResponse) {}
+  rpc FindAllAccounts(FindAllAccountsRequest) returns (FindAllAccountsResponse) {}
+}
+
+message Account {
+  string id = 1;
+  string holder = 2;
+  bool isActive = 3;
+}
+
+message FindAllAccountsResponseData {
+  repeated Account accounts = 3;
+  int32 total = 4;
+  int32 count = 5;
+  int32 page = 6;
+}
+
+message FindAllAccountsRequest { int32 page = 1; }
+
+message FindAllAccountsResponse {
+  int32 status = 1;
+  repeated string error = 2;
+  FindAllAccountsResponseData data = 3;
+}
+
+message FindAccountRequest { string id = 1; }
+
+message FindAccountResponse {
+  int32 status = 1;
+  repeated string error = 2;
+  Account data = 3;
+}
